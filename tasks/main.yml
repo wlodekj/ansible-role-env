@@ -59,7 +59,7 @@
     module_path: pam_env.so
     module_arguments: "{{ env_pam_module_arguments }}"
     state: updated
-  when: env_pam_path != ""
+  when: env_pam_path | length
 
 - name: Create new .pam_environment file
   file:
@@ -67,7 +67,7 @@
     state: touch
     mode: 0400
     owner: "{{ env_pam_owner }}"
-  when: env_pam_path != ""
+  when: env_pam_path | length
 
 - name: Set user pam env variables
   lineinfile:
@@ -75,4 +75,4 @@
     line: "{{ item.line }}"
     regexp: "{{ item.regexp }}"
   with_items: "{{ env_pam_vars }}"
-  when: env_pam_path != ""
+  when: env_pam_path | length
