@@ -14,6 +14,6 @@ def test_env_vars_added(host):
 
 
 def test_pam_env_vars_added(host):
-    f = host.file('/var/www/.pam_environment')
+    f = host.file('/home/vagrant/.pam_environment')
 
     assert f.exists
